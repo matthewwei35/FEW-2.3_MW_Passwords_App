@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { addPassword } from './actions';
 
 function generatePassword() {
   let output = '';
@@ -12,6 +14,7 @@ function generatePassword() {
 }
 
 function Password() {
+  const dispatch = useDispatch();
   const [password, setPassword] = useState('p@$$w0rd');
   const [title, setTitle] = useState('');
  
@@ -23,6 +26,11 @@ function Password() {
         value={title}
         placeholder={'Title'}
       />
+      <div>
+        <button onClick={(e) => {
+          dispatch(addPassword(title, password))
+        }}>Save</button>
+      </div>
       <div>{password}</div>
       <input
         onChange={(e) => setPassword(e.target.value)}
